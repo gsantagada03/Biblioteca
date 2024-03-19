@@ -2,11 +2,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Libro libro = new Libro("Il decameron", 10, 20);
-        Libro libro2 = new Libro("L'iliade", 10, 0);
-        
+
         Biblioteca biblioteca = new Biblioteca();
         Scanner sc = new Scanner(System.in);
+
+        Libro libro = new Libro("Il decameron", 10, 20);
+        Libro libro2 = new Libro("L'iliade", 10, 0);
+
+        biblioteca.aggiungiLibro("il decameron", 10);
+        biblioteca.aggiungiLibro("L'iliade", 30);
+
 
         biblioteca.stampaLibri();
 
