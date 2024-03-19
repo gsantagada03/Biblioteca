@@ -1,70 +1,75 @@
 import java.util.ArrayList;
 
 public class Biblioteca {
-    Libro libro = new Libro("", 0, 0);
-    ArrayList<Libro> libri = new ArrayList<>();
+    ArrayList<Libro> libri;
+    public Biblioteca() {
+        this.libri = new ArrayList<>();
+    }
 
-
-    //metodo che aggiunge in libro in base all'input dell'utente
-    public void aggiungiLibro(String librodaAggiungere, int copieDisponibili) {
-        //ciclo che controlla se il libro è già presente
-        for (int i = 0; i < libri.size(); i++) {
+    // metodo che aggiunge in libro in base all'input dell'utente
+    public boolean aggiungiLibro(String librodaAggiungere, int copieDisponibili) {
+        for (Libro libro : libri) {
             if (libro.getNome().equals(librodaAggiungere)) {
-                System.out.println("Libro già presente");
-                break;
+                System.out.println("il libro è già presente");
+                return false;
             }
         }
-        //in caso non sia presente, aggiunge il libro
-        libri.add(libro);
-
+        Libro libroDaAggiungere = new Libro(librodaAggiungere, 0, copieDisponibili);
+        libri.add(libroDaAggiungere);
+        System.out.println("libro aggiunto con successo");
+        return true;
     }
 
-
-    //metodo che rimuove il libro in base all'input dell'utente
-    public void rimuoviLibro(String nomeLibroDaRimuovere) {
-        //ciclo che controlla il libro in base al titolo, se trova il libro lo rimuove
-        for (int i = 0; i < libri.size(); i++) {
-            if (libro.getNome().contains(nomeLibroDaRimuovere)) {
-                libri.remove(i);
-                break;
+    // metodo che rimuove il libro in base all'input dell'utente
+    public boolean rimuoviLibro(String nomeLibroDaRimuovere) {
+        for (Libro libro : libri) {
+            if (libro.getNome().equals(nomeLibroDaRimuovere)) {
+                libri.remove(libro);
+                System.out.println("libro rimosso con successo");
+                return true;
             }
         }
-        //in caso non lo trovi, stampa un messaggio di errore
-        System.out.println("il libro non è presente nella biblioteca");
+        System.out.println("libro non trovato");
+        return false;
     }
 
-    //metodo che presta il libro
-    public void prestaLibro(String nomeLibro) {
-        //ciclo che controlla il libro in base al titolo
-        for (int i = 0; i < libri.size(); i++) {
-            //se il libro è presente e le copie disponibili sono maggiori di 0, manda un messaggio di avvenuto prestito e modifica le copie disponibili e quelle in presito
-            if(libro.getNome().equals(nomeLibro)){
-                if(libro.getCopieDisponibili()>0){
-                    System.out.println("libro prestato con successo");
-                    libro.setCopieDisponibili(-1);
-                    libro.setCopieInPrestito(+1);
+    // metodo che presta il libro
+    public boolean prestaLibro(String nomeLibro) {
+        for (Libro libro : libri) {
+            if (libro.getNome().equals(nomeLibro)) {
+                if (libro.getCopieDisponibili() > 0) {
+                    libro.setCopieDisponibili(libro.getCopieDisponibili() - 1);
+                    libro.setCopieInPrestito(libro.getCopieInPrestito() + 1);
+                    System.out.println("prestito libro avvenuto con successo");
+                    return true;
+                } else {
+                    System.out.println("non ci sono copie disponibili");
+                    return false;
                 }
             }
         }
-        System.out.println("libro non trovato");
+        System.out.println("Non è presente un libro con quel titolo");
+        return false;
     }
 
-    //metodo che restituisce il libro
-    public void restituisciLibro(String nomeLibro){
-        for(int i = 0; i < libri.size(); i++){
+    // metodo che restituisce il libro
+    public boolean restituisciLibro(String nomeLibro){
+        for(Libro libro : libri){
             if(libro.getNome().equals(nomeLibro)){
-                System.out.println("Libro restituito");
-                libro.setCopieDisponibili(+1);
-                libro.setCopieInPrestito(-1);
+                libro.setCopieDisponibili(libro.getCopieDisponibili()+1);
+                libro.setCopieInPrestito(libro.getCopieInPrestito()-1);
+                System.out.println("libro restituito con successo");
+                return true;
             }
         }
-        System.out.println("libro non trovato");
+        System.out.println("libro non presente in biblioteca");
+        return false;
     }
 
-    //metodo che stampa tutti i libri presenti
-    public void stampaLibri(){
-        for(int i = 0; i < libri.size(); i++){
-            System.out.println(libri.get(i));
+    // metodo che stampa tutti i libri presenti
+    public void stampaLibri() {
+        for(Libro libro : libri){
+            System.out.println(libro.getNome());
         }
     }
 }

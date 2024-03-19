@@ -2,43 +2,36 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        Biblioteca biblioteca = new Biblioteca();
         Scanner sc = new Scanner(System.in);
 
-        Libro libro = new Libro("Il decameron", 10, 20);
-        Libro libro2 = new Libro("L'iliade", 10, 0);
-
-        biblioteca.aggiungiLibro("il decameron", 10);
-        biblioteca.aggiungiLibro("L'iliade", 30);
-
-
-        biblioteca.stampaLibri();
+        Biblioteca biblioteca = new Biblioteca();
+        biblioteca.aggiungiLibro("Il signore degli anelli", 20);
+        biblioteca.aggiungiLibro("La divina commedia", 5);
 
         System.out.println("che operazione vuoi effettuare?");
         String scelta = sc.nextLine();
 
-        if(scelta.equals("prestito")){
-            System.out.println("Inserisci il libro che vuoi in prestito");
-            String libroInPrestito = sc.nextLine();
-            biblioteca.prestaLibro(libroInPrestito);
+       if(scelta.equals("aggiunta libro")){
+        System.out.println("inserisci il libro che vuoi aggiungere e quante copie vuoi aggiungere");
+        String sceltaLibroDaAggiungere = sc.nextLine();
+        int copieDaAggiungere = sc.nextInt();
+        biblioteca.aggiungiLibro(sceltaLibroDaAggiungere, copieDaAggiungere);
 
-        }else if(scelta.equals("restituzione")){
-            System.out.println("Inserisci il libro che vuoi restituire");
-            String librodaRestituire = sc.nextLine();
-            biblioteca.restituisciLibro(librodaRestituire);
+       }else if(scelta.equals("rimozione libro")){
+        System.out.println("seleziona il libro che vuoi rimuovere");
+        String librodaRimuovere = sc.nextLine();
+        biblioteca.rimuoviLibro(librodaRimuovere);
 
-        }else if(scelta.equals("aggiunta")){
-            System.out.println("inserisci il libro che vuoi aggiungere e le copie");
-            String librodaAggiungere = sc.nextLine();
-            int copieDaAggiungere = sc.nextInt();
-            biblioteca.aggiungiLibro(librodaAggiungere,copieDaAggiungere );
+       }else if(scelta.equals("prestito libro")){
+        System.out.println("scegli il libro che vuoi prendere in prestito");
+        String libroInPrestito = sc.nextLine();
+        biblioteca.prestaLibro(libroInPrestito);
 
-        }else if(scelta.equals("rimozione")){
-            System.out.println("inserisci il libro che vuoi rimuovere");
-            String libroDaRimuovere = sc.nextLine();
-            biblioteca.rimuoviLibro(libroDaRimuovere);
-        }
-        sc.close();
+       }else if(scelta.equals("restituzione libro")){
+        System.out.println("quale libro vuoi restituire?");
+        String libroDaRestituire = sc.nextLine();
+        biblioteca.restituisciLibro(libroDaRestituire);
+       }
+       sc.close();
     }
 }
