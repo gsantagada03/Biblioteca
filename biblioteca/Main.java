@@ -8,7 +8,7 @@ public class Main {
         biblioteca.aggiungiLibro("Il signore degli anelli", 20);
         biblioteca.aggiungiLibro("La divina commedia", 5);
 
-        System.out.println("che operazione vuoi effettuare?");
+        System.out.println("che operazione vuoi effettuare? \n aggiunta libro \n rimozione libro \n prestito libro \n restituzione libro");
         String scelta = sc.nextLine();
 
        if(scelta.equals("aggiunta libro")){
